@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import TypingTest from "./components/TypingTest";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import HomePage from "./pages/HomePage";
+import SessionsPage from "./pages/SessionsPage";
 
 function App() {
+  const { user } = useContext(AuthContext); // Check if user is logged in
+  //console.log(user);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
+        <Route path="/typing-test" element={user ? <TypingTest /> : <Navigate to="/login" />} />
+        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route path="/sessions" element={user ? <SessionsPage /> : <Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
 }
 
