@@ -31,7 +31,7 @@ This is the frontend of the Typing Speed Test application, built with React.js a
 
 3. Create a .env file in the root directory and add the following variables:
    ```sh
-   REACT_APP_API_URL=http://localhost:5000
+   REACT_APP_API_URL=https://typing-test-backend-3j70.onrender.com/api
    ```
 
 4. Run the server:
